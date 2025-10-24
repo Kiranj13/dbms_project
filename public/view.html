@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data from MongoDB</title>
+  <style>
+    table {
+      width: 50%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">User Data from MongoDB</h1>
+  <table>
+    <thead>
+      <tr><th>Patient</th><th>Doctor</th>
+      </tr>
+    </thead>
+    <tbody id="data-table">
+    </tbody>
+  </table>
+  <script>
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(data => {
+        const table = document.getElementById('data-table');
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${item.patient}</td><td>${item.doctor}</td>`;
+          table.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>
+
+
+
+
+
